@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/purecss@2.0.6/build/base-min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/purecss@2.0.6/build/buttons-min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/purecss@2.0.6/build/forms-min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .loader {
+        --b: 10px; /* border thickness */
+        --n: 10; /* number of dashes*/
+        --g: 10deg; /* gap  between dashes*/
+        --c: red; /* the color */
+
+        width: 100px; /* size */
+        aspect-ratio: 1;
+        border-radius: 50%;
+        padding: 1px; /* get rid of bad outlines */
+        background: conic-gradient(#0000, var(--c)) content-box;
+        -webkit-mask: /* we use +/-1deg between colors to avoid jagged edges */ repeating-conic-gradient(
+            #0000 0deg,
+            #000 1deg calc(360deg / var(--n) - var(--g) - 1deg),
+            #0000 calc(360deg / var(--n) - var(--g)) calc(360deg / var(--n))
+          ),
+          radial-gradient(
+            farthest-side,
+            #0000 calc(98% - var(--b)),
+            #000 calc(100% - var(--b))
+          );
+        mask: repeating-conic-gradient(
+            #0000 0deg,
+            #000 1deg calc(360deg / var(--n) - var(--g) - 1deg),
+            #0000 calc(360deg / var(--n) - var(--g)) calc(360deg / var(--n))
+          ),
+          radial-gradient(
+            farthest-side,
+            #0000 calc(98% - var(--b)),
+            #000 calc(100% - var(--b))
+          );
+        -webkit-mask-composite: destination-in;
+        mask-composite: intersect;
+        animation: load 1s infinite steps(var(--n));
+      }
+      @keyframes load {
+        to {
+          transform: rotate(1turn);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 style="text-align: center;">
+      Formulário para envio de sites/páginas sobre Odemira
+    </h1>
+
+    <form
+      id="form"
+      class="pure-form pure-form-aligned"
+      action="/post"
+      method="post"
+    >
+      <fieldset>
+        <div class="pure-control-group">
+          <label for="aligned-email">ID</label>
+          <input
+            class="pure-input-1-2"
+            type="number"
+            name="nid"
+            placeholder="Nº de identificação de estudante do aluno"
+            min="1"
+            max="9999"
+            required
+          />
+        </div>
+        <div class="pure-control-group">
+          <label for="aligned-email">Endereços Web</label>
+          <textarea
+            class="pure-input-1-2"
+            name="urltxtlist"
+            placeholder="Um ou mais urls separados por vírgulas para determinada justificação, no máximo de 100"
+            required
+          ></textarea>
+          <input type="hidden" name="okurls" />
+        </div>
+        <div class="pure-control-group">
+          <label class="pure-radio">Tipo</label>
+          <input
+            type="radio"
+            id="checkbox-radio-option-two"
+            name="optionsRadios"
+            value="option1"
+          />
+          Site
+          <input
+            type="radio"
+            id="checkbox-radio-option-three"
+            name="optionsRadios"
+            value="option2"
+            checked=""
+          />
+          Página
+          <input
+            type="radio"
+            id="checkbox-radio-option-four"
+            name="optionsRadios"
+            value="option3"
+          />
+          Híbrido
+        </div>
+        <div class="pure-control-group">
+          <label class="pure-radio"></label>
+          <span style="color: red;"
+            ><i>Sites</i> - para recursos com conteúdos exclusivos relacionados
+            com Odemira, ex: cm-odemira.pt</span
+          >
+        </div>
+        <div class="pure-control-group">
+          <label class="pure-radio"></label>
+          <span style="color: red;"
+            ><i>Páginas</i> - para páginas acerca de Odemira em sites diversos,
+            ex: pt.wikipedia.org/odemira</span
+          >
+        </div>
+        <div class="pure-control-group">
+          <label class="pure-radio"></label>
+          <span style="color: red;"
+            ><i>Híbrido</i> - Ambos. ex: cm-odemira.pt,
+            pt.wikipedia.org/odemira</span
+          >
+        </div>
+        <div class="pure-control-group">
+          <label>Categoria</label>
+          <input
+            class="pure-input-1-2"
+            list="catgs"
+            placeholder="Escolher categoria"
+            required
+          />
+        </div>
+        <datalist id="catgs">
+          <option value="Historia"> </option>
+          <option value="Arte/cultura"> </option>
+          <option value="Patrimonio"> </option>
+          <option value="Desporto"> </option>
+          <option value="Infraestruturas"> </option>
+          <option value="Educação"> </option>
+          <option value="Media"> </option>
+          <option value="Religião"> </option>
+          <option value="Eventos"> </option>
+          <option value="Personalidades"> </option>
+          <option value="Pessoal"> </option>
+          <option value="Institucional"> </option>
+          <option value="Social/ONG"> </option>
+          <option value="Geografia"> </option>
+        </datalist>
+
+        <div class="pure-control-group">
+          <label for="aligned-email">Justificação</label>
+          <textarea
+            class="pure-input-1-2"
+            placeholder="Justificação das técnicas de pesquisa utilizadas na obtenção do resultado proposto"
+            required
+          ></textarea>
+        </div>
+        <div class="pure-control-group">
+          <label for="aligned-name">Exemplo</label>
+          <input
+            class="pure-input-1-2"
+            type="text"
+            id="aligned-name"
+            placeholder="Exemplo de aplicação da técnica mencionada na justificação"
+          />
+          <span class="pure-form-message-inline">Opcional</span>
+        </div>
+        <div class="pure-controls">
+          <button type="submit" class="pure-button pure-button-primary">
+            Enviar
+          </button>
+          <span id="msgStatus" class="pure-form-message-inline"></span>
+          <div
+            class="loader"
+            style="
+              --b: 5px;
+              --c: #000;
+              width: 20px;
+              --n: 15;
+              --g: 7deg;
+              height: 20px;
+              display: none;
+              vertical-align: middle;
+            "
+          ></div>
+        </div>
+      </fieldset>
+    </form>
+
+    <form class="pure-form pure-form-aligned">
+      <fieldset>
+        <div class="pure-control-group">
+          <label for="aligned-name"><h3>Exemplo:</h3></label>
+        </div>
+        <div class="pure-control-group">
+          <label for="aligned-email">ID</label>
+          <input
+            class="pure-input-1-2"
+            type="number"
+            name="nid"
+            placeholder="Nº de identificação de estudante do aluno"
+            value="0000"
+            readonly
+          />
+        </div>
+        <div class="pure-control-group">
+          <label for="aligned-name">Endereços Web</label>
+          <input
+            class="pure-input-1-2"
+            type="text"
+            id="aligned-name"
+            placeholder="Username"
+            value="http://www.cm-odemira.pt"
+            readonly
+          />
+        </div>
+        <div class="pure-control-group">
+          <label class="pure-radio">Tipo</label>
+          <input
+            type="radio"
+            id="checkbox-radio-option-two"
+            name="optionsRadios"
+            value="option1"
+            checked
+            readonly
+          />
+          Site
+          <input
+            type="radio"
+            id="checkbox-radio-option-three"
+            name="optionsRadios"
+            value="option2"
+            readonly
+          />
+          Página
+          <input
+            type="radio"
+            id="checkbox-radio-option-four"
+            name="optionsRadios"
+            value="option3"
+            readonly
+          />
+          Híbrido
+        </div>
+        <div class="pure-control-group">
+          <label>Categoria</label>
+          <input
+            class="pure-input-1-2"
+            list="catgs"
+            placeholder="Escolher categoria"
+            value="Institucional"
+            readonly
+          />
+        </div>
+        <div class="pure-control-group">
+          <label for="aligned-email">Justificação</label>
+          <textarea
+            class="pure-input-1-2"
+            placeholder="Endereço obtido ao utilizar o comando intitle:odemira do google que retorna conteúdos com o termo (neste caso odemira) no título da página (consultável na barra superior da janela do browser)"
+            readonly
+          ></textarea>
+        </div>
+        <div class="pure-control-group">
+          <label for="aligned-name">Exemplo</label>
+          <input
+            class="pure-input-1-2"
+            type="text"
+            id="aligned-name"
+            placeholder="exemplo de aplicação da técnica mencionada na justificação"
+            value="https://www.google.com/search?q=intitle:odemira"
+            readonly
+          />
+        </div>
+      </fieldset>
+    </form>
+
+    <script>
+      (function () {
+        let form = document.forms[0],
+          fields = form.elements;
+        if (fields.length > 100) return;
+        form.addEventListener("submit", (evt) => {
+          evt.preventDefault();
+          document.querySelector(".loader").style.display = "inline-block";
+          let urlList = fields["urltxtlist"].value.split(","),
+            linkrot = [],
+            pass = false;
+          const validUrlList = urlList.filter((url) => {
+            url = url.trim();
+            pass =
+              url.search(
+                /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm
+              ) === -1
+                ? false
+                : true;
+            if (!pass) linkrot.push(url);
+            return pass;
+          });
+          fields["okurls"].value = JSON.stringify(validUrlList);
+          const statusTag = document.querySelector("#msgStatus");
+          if (linkrot.length > 0) {
+            document.querySelector(".loader").style.display = "none";
+            statusTag.innerHTML =
+              '<p style="color:red">Os seguintes endereços foram excluídos por não estarem devidamente formatados<i class="icon-exclamation"></i></p><ul id="stErrList"></ul>';
+            let errList = document.querySelector("#stErrList");
+            linkrot.forEach((url) => {
+              let li = document.createElement("li");
+              li.innerText = url;
+              errList.appendChild(li);
+            });
+            return;
+          }
+          if (window.Sanitizer) {
+            const sanitize = new Sanitizer();
+            fields["urltxtlist"].setHTML(fields["urltxtlist"].value, sanitize);
+          }
+          let xhr = new XMLHttpRequest();
+          xhr.open("POST", "./post");
+          xhr.timeout = 30000;
+          xhr.onload = function (event) {
+            //alert("Success, server responded with: " + event.target.response); // raw response
+            document.querySelector(".loader").style.display = "none";
+            if (linkrot.length === 0 && event.target.response === "ok") {
+              statusTag.innerHTML =
+                '<span style="color:green">Os dados foram processados e enviados com sucesso <i class="icon-ok"></i></span>';
+              form.reset();
+            } else
+              statusTag.innerHTML =
+                '<span style="color:red">Houve uma falha na resposta do servidor. Tente novamente ou aguarde e tente mais tarde. Em alternativa envie os dados por email para o professor seguindo as especificações do formulário <i class="icon-exclamation"></i></span>';
+          };
+          xhr.ontimeout = function () {
+            document.querySelector(".loader").style.display = "none";
+            statusTag.innerHTML =
+              '<span style="color:red">Houve uma falha na resposta do servidor. Tente novamente ou aguarde e tente mais tarde. Em alternativa envie os dados por email para o professor seguindo as especificações do formulário <i class="icon-exclamation"></i></span>';
+          };
+          xhr.send(new FormData(form));
+          //return false;
+        });
+      })();
+      /*todo*/
+      //entities
+      //sanitize
+      //preserve
+      //linkrot
+      //proofread
+      //geotag
+    </script>
+  </body>
+</html>
